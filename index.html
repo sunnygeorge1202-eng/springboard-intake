@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Springboard Talent — Start Here</title>
+<style>
+:root {
+  --teal:#1D9E75; --teal-light:#E1F5EE; --teal-dark:#0F6E56; --teal-deep:#085041;
+  --text:#1a1a1a; --text-mid:#555; --text-muted:#888;
+  --border:#e0e0e0; --bg:#ffffff; --bg-soft:#f5f7f6; --bg-card:#ffffff;
+  --r:10px; --rl:14px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+@media(prefers-color-scheme:dark){
+  :root{ --text:#f0f0f0; --text-mid:#aaa; --text-muted:#666;
+    --border:#2a2a2a; --bg:#141414; --bg-soft:#1a1a1a; --bg-card:#1c1c1c; }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg-soft);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+.shell{max-width:600px;margin:0 auto;padding:0 1.25rem 5rem}
+
+/* header */
+.hdr{padding:1.75rem 0 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:15px;font-weight:700;color:var(--teal);letter-spacing:-0.01em}
+.logo span{color:var(--text-muted);font-weight:400}
+.step-ct{font-size:13px;color:var(--text-muted)}
+
+/* progress */
+.prog-track{height:3px;background:var(--border);border-radius:2px;margin-bottom:2.5rem}
+.prog-fill{height:3px;background:var(--teal);border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+/* card */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--rl);padding:1.75rem 2rem;margin-bottom:1rem}
+
+/* welcome card */
+.welcome-mark{font-size:36px;margin-bottom:1.25rem;line-height:1}
+.welcome-title{font-size:28px;font-weight:700;letter-spacing:-0.03em;color:var(--text);line-height:1.25;margin-bottom:.75rem}
+.welcome-intro{font-size:15px;color:var(--text-mid);line-height:1.75;margin-bottom:1.75rem}
+.process-steps{display:flex;flex-direction:column;gap:0}
+.ps{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--border)}
+.ps:last-child{border-bottom:1px solid var(--border)}
+.ps-num{width:26px;height:26px;border-radius:50%;background:var(--teal-light);color:var(--teal-deep);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+@media(prefers-color-scheme:dark){.ps-num{background:#085041;color:#5DCAA5}}
+.ps-body{}
+.ps-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+.ps-desc{font-size:13px;color:var(--text-muted);line-height:1.5}
+.welcome-note{font-size:13px;color:var(--text-muted);margin-top:1.5rem;line-height:1.6;padding:12px 14px;background:var(--bg-soft);border-radius:var(--r);border:1px solid var(--border)}
+.welcome-note strong{color:var(--text);font-weight:600}
+
+/* pill */
+.pill{display:inline-block;font-size:11px;font-weight:600;color:var(--teal-dark);background:var(--teal-light);padding:3px 10px;border-radius:20px;margin-bottom:1rem;letter-spacing:.04em;text-transform:uppercase}
+@media(prefers-color-scheme:dark){.pill{background:#085041;color:#5DCAA5}}
+
+/* greeting */
+.greeting{font-size:13px;font-weight:500;color:var(--teal);margin-bottom:.35rem}
+.q-title{font-size:22px;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:.4rem;letter-spacing:-.02em}
+.q-sub{font-size:14px;color:var(--text-mid);line-height:1.65;margin-bottom:1.75rem}
+
+/* fields */
+.flbl{font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
+.fg{margin-bottom:1.1rem}
+input[type=text],input[type=email],input[type=tel],input[type=number],textarea,select{
+  width:100%;font-family:var(--font);font-size:15px;padding:12px 14px;
+  border:1px solid var(--border);border-radius:var(--r);
+  background:var(--bg);color:var(--text);outline:none;
+  transition:border .15s,box-shadow .15s;-webkit-appearance:none}
+input:focus,textarea:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(29,158,117,.12)}
+textarea{resize:vertical;min-height:90px;line-height:1.6}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.two{grid-template-columns:1fr}}
+
+/* choices */
+.choices{display:flex;flex-direction:column;gap:8px}
+.choice{padding:12px 16px;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;font-size:14px;color:var(--text);background:var(--bg);transition:border .15s,background .15s;user-select:none;line-height:1.5}
+.choice:hover{border-color:var(--teal);background:var(--teal-light)}
+.choice.sel{border-color:var(--teal);background:var(--teal-light);color:var(--teal-deep);font-weight:500}
+@media(prefers-color-scheme:dark){.choice:hover,.choice.sel{background:#085041;color:#9FE1CB;border-color:#1D9E75}}
+
+/* step */
+.step{display:none}.step.active{display:block}
+
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;padding-top:.5rem}
+.btn-back{font-family:var(--font);font-size:14px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:8px 0;visibility:hidden}
+.btn-back:hover{color:var(--text)}
+.btn-next{font-family:var(--font);font-size:15px;font-weight:600;background:var(--teal);color:#fff;border:none;border-radius:var(--r);padding:13px 30px;cursor:pointer;transition:background .15s,transform .1s;letter-spacing:-.01em}
+.btn-next:hover{background:var(--teal-dark)}
+.btn-next:active{transform:scale(.98)}
+.btn-next:disabled{opacity:.4;cursor:default}
+
+/* audio zone */
+.az{background:var(--bg-soft);border:1.5px dashed var(--border);border-radius:var(--rl);padding:2rem 1.5rem;text-align:center;transition:border .2s,background .2s}
+.az.recording{border-color:#E24B4A;border-style:solid;background:#fff8f8}
+.az.done{border-color:var(--teal);border-style:solid;background:var(--teal-light)}
+@media(prefers-color-scheme:dark){.az.recording{background:#1f1212}.az.done{background:#06302a}}
+.az-prompt{font-size:16px;font-weight:600;color:var(--text);margin-bottom:.35rem}
+.az-guide{font-size:13px;color:var(--text-mid);margin-bottom:1.5rem;line-height:1.65}
+.az-duration{font-size:12px;color:var(--text-muted);margin-bottom:1.25rem;padding:5px 12px;border:1px solid var(--border);border-radius:20px;display:inline-block}
+
+.wf{display:none;align-items:center;justify-content:center;gap:3px;height:34px;margin-bottom:.75rem}
+.wf.on{display:flex}
+.wb{width:3px;background:#E24B4A;border-radius:2px;animation:wv .8s ease-in-out infinite}
+.wb:nth-child(2){animation-delay:.1s}.wb:nth-child(3){animation-delay:.2s}.wb:nth-child(4){animation-delay:.3s}
+.wb:nth-child(5){animation-delay:.4s}.wb:nth-child(6){animation-delay:.3s}.wb:nth-child(7){animation-delay:.2s}.wb:nth-child(8){animation-delay:.1s}
+@keyframes wv{0%,100%{height:5px}50%{height:26px}}
+
+.timer{font-size:30px;font-weight:700;color:#E24B4A;font-variant-numeric:tabular-nums;margin-bottom:.5rem;display:none;letter-spacing:-.02em}
+.timer.on{display:block}
+.timer-max{font-size:11px;color:var(--text-muted);margin-bottom:1rem;display:none}
+.timer-max.on{display:block}
+
+.mic-btn{width:68px;height:68px;border-radius:50%;background:var(--teal);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;transition:background .15s,transform .15s;position:relative}
+.mic-btn:hover{background:var(--teal-dark)}
+.mic-btn.rec{background:#E24B4A;animation:pulse 1.5s infinite}
+.mic-btn svg{width:28px;height:28px;fill:#fff}
+@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(226,75,74,.4)}50%{transform:scale(1.06);box-shadow:0 0 0 12px rgba(226,75,74,0)}}
+
+.mic-lbl{font-size:13px;color:var(--text-muted);margin-bottom:1rem;transition:color .15s}
+.mic-lbl.rec{color:#E24B4A;font-weight:600}
+.mic-lbl.done{color:var(--teal);font-weight:600}
+
+.pb{display:none;flex-direction:column;align-items:center;gap:10px;margin-top:.5rem}
+.pb.on{display:flex}
+audio{width:100%;max-width:340px;height:40px}
+.audio-acts{display:flex;gap:10px}
+.btn-rerec{font-family:var(--font);font-size:13px;color:var(--text-mid);background:none;border:1px solid var(--border);border-radius:var(--r);padding:7px 14px;cursor:pointer;transition:border .15s}
+.btn-rerec:hover{border-color:var(--text-mid);color:var(--text)}
+
+.tx-area{margin-top:1rem;text-align:left}
+.tx-tag{display:inline-block;font-size:11px;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:4px;margin-bottom:6px;font-weight:600}
+@media(prefers-color-scheme:dark){.tx-tag{background:#085041;color:#5DCAA5}}
+.tx-text{font-size:13px;color:var(--text-mid);line-height:1.65}
+
+.or-div{text-align:center;font-size:12px;color:var(--text-muted);margin:1.25rem 0 .75rem;position:relative}
+.or-div::before,.or-div::after{content:'';position:absolute;top:50%;width:44%;height:1px;background:var(--border)}
+.or-div::before{left:0}.or-div::after{right:0}
+.type-lnk{font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;font-family:var(--font);text-decoration:underline;text-decoration-color:transparent;transition:color .15s,text-decoration-color .15s;display:block;margin:0 auto;text-align:center}
+.type-lnk:hover{color:var(--text);text-decoration-color:var(--text)}
+.tf{display:none;margin-top:1rem}
+.tf.on{display:block}
+
+/* uploading overlay */
+.uploading{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;align-items:center;justify-content:center}
+.uploading.on{display:flex}
+.up-box{background:var(--bg-card);border-radius:var(--rl);padding:2.5rem 2rem;text-align:center;max-width:320px;width:90%}
+.up-spin{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.up-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:.35rem}
+.up-sub{font-size:13px;color:var(--text-muted);line-height:1.6}
+
+/* done */
+.done-wrap{text-align:center;padding:1rem 0}
+.done-mark{font-size:48px;margin-bottom:1rem;line-height:1}
+.done-title{font-size:26px;font-weight:700;color:var(--text);letter-spacing:-.03em;margin-bottom:.5rem}
+.done-sub{font-size:15px;color:var(--text-mid);line-height:1.75;max-width:400px;margin:0 auto 2rem}
+.sum-card{background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--rl);padding:1.25rem 1.5rem;text-align:left}
+.sum-title{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem}
+.sum-row{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);gap:12px}
+.sum-row:last-child{border-bottom:none}
+.sum-l{color:var(--text-muted);flex-shrink:0}
+.sum-v{color:var(--text);font-weight:500;text-align:right}
+.abadge{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:20px}
+@media(prefers-color-scheme:dark){.abadge{background:#085041;color:#5DCAA5}}
+</style>
+</head>
+<body>
+
+<div class="uploading" id="uploading">
+  <div class="up-box">
+    <div class="up-spin"></div>
+    <div class="up-title">Saving your responses</div>
+    <div class="up-sub">Just a moment — we're storing everything securely.</div>
+  </div>
+</div>
+
+<div class="shell">
+  <div class="hdr">
+    <div class="logo">Springboard <span>Talent</span></div>
+    <div class="step-ct" id="step-ct"></div>
+  </div>
+  <div class="prog-track"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+
+  <!-- Step 0: Welcome -->
+  <div class="step active" id="s0">
+    <div class="card">
+      <div class="welcome-mark">✦</div>
+      <div class="welcome-title">A different kind of career conversation.</div>
+      <div class="welcome-intro">
+        Springboard Talent is a small, invitation-based programme run by a group of senior professionals — a coach, an assessor, a talent connector, and a career strategist. We work with a limited number of people at a time, and we work closely.<br><br>
+        We don't send your CV to a hundred companies. We help you figure out what's next, make sure you're ready for it, and then open the right doors.
+      </div>
+      <div class="process-steps">
+        <div class="ps">
+          <div class="ps-num">1</div>
+          <div class="ps-body">
+            <div class="ps-title">This intake form — 10 minutes</div>
+            <div class="ps-desc">Tells us who you are and where you're headed. Some questions let you respond by voice — speak naturally, no script needed.</div>
+          </div>
+        </div>
+        <div class="ps">
+          <div class="ps-num">2</div>
+          <div class="ps-body">
+            <div class="ps-title">A discovery call — 45 minutes</div>
+            <div class="ps-desc">One of our team will call you within 48 hours. This is a real conversation, not a screening. We want to understand your full story.</div>
+          </div>
+        </div>
+        <div class="ps">
+          <div class="ps-num">3</div>
+          <div class="ps-body">
+            <div class="ps-title">Coaching and assessment</div>
+            <div class="ps-desc">Depending on your goals, you'll work with our coach and assessor to sharpen how you show up — on paper and in person.</div>
+          </div>
+        </div>
+        <div class="ps">
+          <div class="ps-num">4</div>
+          <div class="ps-body">
+            <div class="ps-title">Introductions that matter</div>
+            <div class="ps-desc">When you're ready, we make warm introductions to companies and leaders who are genuinely right for you. Not mass applications.</div>
+          </div>
+        </div>
+      </div>
+      <div class="welcome-note">
+        <strong>This is completely free for you.</strong> We do not charge candidates for anything — ever. Your information is kept confidential and shared only with the people directly involved in your journey.
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 1: Name only -->
+  <div class="step" id="s1">
+    <div class="card">
+      <div class="pill">Let's begin</div>
+      <div class="q-title">What's your name?</div>
+      <div class="q-sub">Just your first name is fine to start — we'll get the rest shortly.</div>
+      <div class="fg">
+        <div class="flbl">Your name *</div>
+        <input type="text" id="f-name" placeholder="e.g. Priya" autocomplete="given-name">
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2: Contact -->
+  <div class="step" id="s2">
+    <div class="card">
+      <div class="greeting" id="greeting-s2"></div>
+      <div class="q-title">How can we reach you?</div>
+      <div class="q-sub">We'll use your mobile number to schedule the discovery call, and email to send you a confirmation.</div>
+      <div class="fg">
+        <div class="flbl">Mobile number *</div>
+        <input type="tel" id="f-phone" placeholder="+91 98765 43210" autocomplete="tel">
+      </div>
+      <div class="fg">
+        <div class="flbl">Email address *</div>
+        <input type="email" id="f-email" placeholder="you@email.com" autocomplete="email">
+      </div>
+      <div class="two">
+        <div class="fg">
+          <div class="flbl">City you're based in *</div>
+          <input type="text" id="f-city" placeholder="Bengaluru">
+        </div>
+        <div class="fg">
+          <div class="flbl">LinkedIn URL (optional)</div>
+          <input type="text" id="f-linkedin" placeholder="linkedin.com/in/...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3: Relocation -->
+  <div class="step" id="s3">
+    <div class="card">
+      <div class="greeting" id="greeting-s3"></div>
+      <div class="q-title">Are you open to relocating?</div>
+      <div class="q-sub">This helps us match you to the right opportunities from the start. No wrong answer here.</div>
+      <div class="choices" id="reloc-list">
+        <div class="choice" data-val="anywhere">Open to anywhere in India</div>
+        <div class="choice" data-val="specific">Open to specific cities only</div>
+        <div class="choice" data-val="international">Open to international opportunities</div>
+        <div class="choice" data-val="no">No — I need to stay where I am</div>
+      </div>
+      <div id="reloc-cities-wrap" style="display:none;margin-top:1rem">
+        <div class="flbl">Which cities?</div>
+        <input type="text" id="f-reloc-cities" placeholder="e.g. Mumbai, Pune, Hyderabad">
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 4: Education -->
+  <div class="step" id="s4">
+    <div class="card">
+      <div class="pill">Education</div>
+      <div class="q-title">Tell us about your academic background.</div>
+      <div class="q-sub">Just the essentials — we'll learn the rest in our conversation.</div>
+      <div class="fg">
+        <div class="flbl">Highest qualification *</div>
+        <input type="text" id="f-qual" placeholder="e.g. MBA, B.Tech, CA, M.Sc">
+      </div>
+      <div class="fg">
+        <div class="flbl">College or university *</div>
+        <input type="text" id="f-college" placeholder="Institution name">
+      </div>
+      <div class="two">
+        <div class="fg">
+          <div class="flbl">Year of passing</div>
+          <input type="number" id="f-gradyr" placeholder="2015" min="1970" max="2030">
+        </div>
+        <div class="fg">
+          <div class="flbl">Undergrad degree (if different)</div>
+          <input type="text" id="f-ug" placeholder="B.Com, NIT, 2012">
+        </div>
+      </div>
+      <div class="fg">
+        <div class="flbl">Certifications (optional)</div>
+        <input type="text" id="f-certs" placeholder="e.g. PMP, CFA, AWS, SHRM">
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 5: Work history -->
+  <div class="step" id="s5">
+    <div class="card">
+      <div class="pill">Work history</div>
+      <div class="q-title">Walk us through your career.</div>
+      <div class="q-sub">We want to understand the journey — not just the most recent role.</div>
+      <div class="fg">
+        <div class="flbl">Current or most recent job title *</div>
+        <input type="text" id="f-jobtitle" placeholder="e.g. Senior Product Manager">
+      </div>
+      <div class="two">
+        <div class="fg">
+          <div class="flbl">Most recent employer *</div>
+          <input type="text" id="f-employer" placeholder="Company name">
+        </div>
+        <div class="fg">
+          <div class="flbl">How long in that role?</div>
+          <input type="text" id="f-tenure" placeholder="e.g. 3 years 2 months">
+        </div>
+      </div>
+      <div class="two">
+        <div class="fg">
+          <div class="flbl">Function / domain</div>
+          <input type="text" id="f-fn" placeholder="e.g. Finance, Engineering">
+        </div>
+        <div class="fg">
+          <div class="flbl">Industry</div>
+          <input type="text" id="f-industry" placeholder="e.g. BFSI, SaaS, FMCG">
+        </div>
+      </div>
+      <div class="fg">
+        <div class="flbl">Total years of experience *</div>
+        <select id="f-yoe">
+          <option value="">Select range</option>
+          <option>0 – 2 years</option>
+          <option>3 – 5 years</option>
+          <option>6 – 10 years</option>
+          <option>11 – 15 years</option>
+          <option>16 – 20 years</option>
+          <option>20+ years</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Audio: career history -->
+    <div class="card" style="margin-top:1rem">
+      <div class="pill">Voice response</div>
+      <div class="az" id="az-history">
+        <div class="az-prompt">Now, tell us your story.</div>
+        <div class="az-guide">Where did it all start? What moves did you make along the way? What shaped the path you've taken? Speak freely — this is a conversation, not a report.</div>
+        <div class="az-duration">Up to 3 minutes</div>
+        <div class="wf" id="wf-history">
+          <div class="wb" style="height:6px"></div><div class="wb" style="height:12px"></div>
+          <div class="wb" style="height:20px"></div><div class="wb" style="height:28px"></div>
+          <div class="wb" style="height:20px"></div><div class="wb" style="height:12px"></div>
+          <div class="wb" style="height:6px"></div><div class="wb" style="height:12px"></div>
+        </div>
+        <div class="timer" id="tmr-history">0:00</div>
+        <div class="timer-max" id="tmrmax-history">3:00 max</div>
+        <button class="mic-btn" id="mic-history" aria-label="Start recording">
+          <svg viewBox="0 0 24 24"><path d="M12 1a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v6a2 2 0 0 0 4 0V5a2 2 0 0 0-2-2zm7 8a1 1 0 0 1 1 1 8 8 0 0 1-7 7.94V22h2a1 1 0 1 1 0 2H9a1 1 0 1 1 0-2h2v-2.06A8 8 0 0 1 4 12a1 1 0 1 1 2 0 6 6 0 0 0 12 0 1 1 0 0 1 1-1z"/></svg>
+        </button>
+        <div class="mic-lbl" id="miclbl-history">Tap to speak</div>
+        <div class="pb" id="pb-history">
+          <audio id="aud-history" controls></audio>
+          <div class="audio-acts">
+            <button class="btn-rerec" id="rerec-history">Record again</button>
+          </div>
+          <div class="tx-area" id="tx-history"></div>
+        </div>
+        <div class="or-div">or</div>
+        <button class="type-lnk" id="tl-history">Type your answer instead</button>
+      </div>
+      <div class="tf" id="tf-history">
+        <div class="flbl">Career history</div>
+        <textarea id="f-history" placeholder="Started as an analyst at Deloitte (2012–2015), moved to Infosys as senior consultant (2015–2019)..." style="min-height:110px"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 6: Current situation -->
+  <div class="step" id="s6">
+    <div class="card">
+      <div class="pill">Where you are now</div>
+      <div class="q-title">What best describes your situation right now?</div>
+      <div class="q-sub">Be as honest as you like — this is just between you and us.</div>
+      <div class="choices" id="sit-list">
+        <div class="choice" data-val="laid-off">I was recently laid off</div>
+        <div class="choice" data-val="looking">I am actively looking for a new role</div>
+        <div class="choice" data-val="exploring">I am employed but exploring options</div>
+        <div class="choice" data-val="break">I am taking a career break</div>
+        <div class="choice" data-val="change">I want to change my career direction entirely</div>
+        <div class="choice" data-val="thinking">I just want to think through what's next</div>
+      </div>
+      <div class="fg" style="margin-top:1.25rem">
+        <div class="flbl">How urgent is your search? *</div>
+        <select id="f-urgency">
+          <option value="">Select</option>
+          <option>Very urgent — I need something within a month</option>
+          <option>Reasonably urgent — within 3 months</option>
+          <option>I have some time — within 6 months</option>
+          <option>I am exploring — no hard timeline</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Audio: target direction -->
+    <div class="card" style="margin-top:1rem">
+      <div class="pill">Voice response</div>
+      <div class="az" id="az-target">
+        <div class="az-prompt">What kind of role or direction are you targeting next?</div>
+        <div class="az-guide">Function, level, type of company, industry — be as specific as you can. And if you're not sure, that's okay too. Tell us that. The uncertainty itself is useful for us to hear.</div>
+        <div class="az-duration">Up to 2 minutes</div>
+        <div class="wf" id="wf-target">
+          <div class="wb" style="height:6px"></div><div class="wb" style="height:12px"></div>
+          <div class="wb" style="height:20px"></div><div class="wb" style="height:28px"></div>
+          <div class="wb" style="height:20px"></div><div class="wb" style="height:12px"></div>
+          <div class="wb" style="height:6px"></div><div class="wb" style="height:12px"></div>
+        </div>
+        <div class="timer" id="tmr-target">0:00</div>
+        <div class="timer-max" id="tmrmax-target">2:00 max</div>
+        <button class="mic-btn" id="mic-target" aria-label="Start recording">
+          <svg viewBox="0 0 24 24"><path d="M12 1a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v6a2 2 0 0 0 4 0V5a2 2 0 0 0-2-2zm7 8a1 1 0 0 1 1 1 8 8 0 0 1-7 7.94V22h2a1 1 0 1 1 0 2H9a1 1 0 1 1 0-2h2v-2.06A8 8 0 0 1 4 12a1 1 0 1 1 2 0 6 6 0 0 0 12 0 1 1 0 0 1 1-1z"/></svg>
+        </button>
+        <div class="mic-lbl" id="miclbl-target">Tap to speak</div>
+        <div class="pb" id="pb-target">
+          <audio id="aud-target" controls></audio>
+          <div class="audio-acts">
+            <button class="btn-rerec" id="rerec-target">Record again</button>
+          </div>
+          <div class="tx-area" id="tx-target"></div>
+        </div>
+        <div class="or-div">or</div>
+        <button class="type-lnk" id="tl-target">Type your answer instead</button>
+      </div>
+      <div class="tf" id="tf-target">
+        <div class="flbl">Target role or direction</div>
+        <textarea id="f-target" placeholder="e.g. Head of Finance at a mid-size tech company in Bengaluru. Open to CFO roles at early-stage startups too."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 7: Compensation -->
+  <div class="step" id="s7">
+    <div class="card">
+      <div class="pill">Compensation</div>
+      <div class="q-title">Help us match you to the right opportunities.</div>
+      <div class="q-sub">Approximate is absolutely fine. This stays within our team.</div>
+      <div class="two">
+        <div class="fg">
+          <div class="flbl">Current or last CTC (INR Lakhs)</div>
+          <input type="text" id="f-ctc" placeholder="e.g. 18 LPA">
+        </div>
+        <div class="fg">
+          <div class="flbl">Expected CTC (INR Lakhs)</div>
+          <input type="text" id="f-ectc" placeholder="e.g. 22–25 LPA">
+        </div>
+      </div>
+      <div class="fg">
+        <div class="flbl">How flexible are you on compensation?</div>
+        <div class="choices" id="flex-list">
+          <div class="choice" data-val="need-current">I need at least my current CTC</div>
+          <div class="choice" data-val="flexible">I can be flexible for the right role and culture</div>
+          <div class="choice" data-val="step-down">I am open to a step down for the right opportunity</div>
+          <div class="choice" data-val="not-primary">Compensation is not my primary consideration right now</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 8: Outcome + consent -->
+  <div class="step" id="s8">
+    <div class="card">
+      <div class="pill">One last thing</div>
+      <div class="q-title">What would a good outcome from this feel like?</div>
+      <div class="q-sub">Not a job title — a feeling. What would make you look back and think "yes, that was worth it"? There's no right answer. Speak or write freely.</div>
+      <div class="az" id="az-outcome">
+        <div class="az-prompt">Tell us in your own words.</div>
+        <div class="az-guide">This is the beginning of the conversation — not a test. Honesty here is more useful than polish. Take a moment before you start if you need to.</div>
+        <div class="az-duration">Up to 2 minutes</div>
+        <div class="wf" id="wf-outcome">
+          <div class="wb" style="height:6px"></div><div class="wb" style="height:12px"></div>
+          <div class="wb" style="height:20px"></div><div class="wb" style="height:28px"></div>
+          <div class="wb" style="height:20px"></div><div class="wb" style="height:12px"></div>
+          <div class="wb" style="height:6px"></div><div class="wb" style="height:12px"></div>
+        </div>
+        <div class="timer" id="tmr-outcome">0:00</div>
+        <div class="timer-max" id="tmrmax-outcome">2:00 max</div>
+        <button class="mic-btn" id="mic-outcome" aria-label="Start recording">
+          <svg viewBox="0 0 24 24"><path d="M12 1a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v6a2 2 0 0 0 4 0V5a2 2 0 0 0-2-2zm7 8a1 1 0 0 1 1 1 8 8 0 0 1-7 7.94V22h2a1 1 0 1 1 0 2H9a1 1 0 1 1 0-2h2v-2.06A8 8 0 0 1 4 12a1 1 0 1 1 2 0 6 6 0 0 0 12 0 1 1 0 0 1 1-1z"/></svg>
+        </button>
+        <div class="mic-lbl" id="miclbl-outcome">Tap to speak</div>
+        <div class="pb" id="pb-outcome">
+          <audio id="aud-outcome" controls></audio>
+          <div class="audio-acts">
+            <button class="btn-rerec" id="rerec-outcome">Record again</button>
+          </div>
+          <div class="tx-area" id="tx-outcome"></div>
+        </div>
+        <div class="or-div">or</div>
+        <button class="type-lnk" id="tl-outcome">Type your answer instead</button>
+      </div>
+      <div class="tf" id="tf-outcome">
+        <div class="flbl">What would a good outcome feel like?</div>
+        <textarea id="f-outcome" placeholder="e.g. I'd feel like I finally have a clear direction. Or: I want to stop second-guessing every application I send."></textarea>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:1rem">
+      <div class="pill">Data consent</div>
+      <div class="q-title" style="font-size:18px">One last confirmation.</div>
+      <div class="q-sub">We take your privacy seriously. Please read and confirm below before submitting.</div>
+      <div class="choices" id="consent-list">
+        <div class="choice" data-val="yes" style="font-size:13px;line-height:1.7">I agree to Springboard Talent storing my information — including any voice recordings — and sharing my profile with potential employers, coaches, and mentors as part of this programme. I understand my data will be handled with care, used only for career support purposes, and I can request its deletion at any time by writing to <strong>springboardtalentpartners@gmail.com</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 9: Done -->
+  <div class="step" id="s9">
+    <div class="card">
+      <div class="done-wrap">
+        <div class="done-mark">✦</div>
+        <div class="done-title" id="done-title">You're in.</div>
+        <div class="done-sub">We've received everything and saved it securely. Someone from the Springboard Talent team will reach out within 48 hours to schedule your discovery call.<br><br>This is where the real conversation begins.</div>
+        <div class="sum-card">
+          <div class="sum-title">Your submission</div>
+          <div id="sum-rows"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav" id="nav-bar">
+    <button class="btn-back" id="btn-back">← Back</button>
+    <button class="btn-next" id="btn-next">Let's begin →</button>
+  </div>
+</div>
+
+<script>
+const SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+const TOTAL_STEPS = 8;
+let cur = 0;
+const D = {};
+const audioBlobs = {};
+const transcripts = {};
+
+const $ = id => document.getElementById(id);
+
+function firstName() { return (D.name || '').split(' ')[0] || ''; }
+
+function show(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  $('s' + n).classList.add('active');
+  const pct = n === 0 ? 0 : Math.round((n / TOTAL_STEPS) * 100);
+  $('prog').style.width = (n >= TOTAL_STEPS ? 100 : pct) + '%';
+  $('btn-back').style.visibility = (n > 0 && n < TOTAL_STEPS) ? 'visible' : 'hidden';
+  $('step-ct').textContent = n > 0 && n < TOTAL_STEPS ? n + ' of ' + TOTAL_STEPS : '';
+  const labels = {
+    0: "Let's begin →",
+    1: 'Continue →', 2: 'Continue →', 3: 'Continue →',
+    4: 'Continue →', 5: 'Continue →', 6: 'Continue →',
+    7: 'Continue →', 8: 'Submit ✓'
+  };
+  $('btn-next').textContent = labels[n] || 'Continue →';
+  $('nav-bar').style.display = n >= TOTAL_STEPS ? 'none' : 'flex';
+  if ($('greeting-s' + n)) {
+    const fn = firstName();
+    $('greeting-s' + n).textContent = fn ? 'Hi ' + fn + ',' : '';
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function singleChoice(listId, key) {
+  const el = $(listId); if (!el) return;
+  el.querySelectorAll('.choice').forEach(c => {
+    c.addEventListener('click', () => {
+      el.querySelectorAll('.choice').forEach(x => x.classList.remove('sel'));
+      c.classList.add('sel');
+      D[key] = c.dataset.val;
+      if (key === 'relocation')
+        $('reloc-cities-wrap').style.display = c.dataset.val === 'specific' ? 'block' : 'none';
+    });
+  });
+}
+singleChoice('reloc-list', 'relocation');
+singleChoice('sit-list', 'situation');
+singleChoice('flex-list', 'comp_flex');
+singleChoice('consent-list', 'consent');
+
+function validate(n) {
+  if (n === 0) return true;
+  if (n === 1) return $('f-name').value.trim().length > 0;
+  if (n === 2) return $('f-phone').value.trim() && $('f-email').value.trim() && $('f-city').value.trim();
+  if (n === 3) return !!D.relocation;
+  if (n === 4) return $('f-qual').value.trim() && $('f-college').value.trim();
+  if (n === 5) return $('f-jobtitle').value.trim() && $('f-employer').value.trim() && $('f-yoe').value;
+  if (n === 6) return !!D.situation && $('f-urgency').value;
+  if (n === 7) return !!D.comp_flex;
+  if (n === 8) return D.consent === 'yes' && (audioBlobs['outcome'] || $('f-outcome').value.trim());
+  return true;
+}
+
+function collect() {
+  D.name    = $('f-name').value.trim();
+  D.phone   = $('f-phone').value.trim();
+  D.email   = $('f-email').value.trim();
+  D.city    = $('f-city').value.trim();
+  D.linkedin= $('f-linkedin').value.trim();
+  D.reloc_cities = $('f-reloc-cities').value.trim();
+  D.qual    = $('f-qual').value.trim();
+  D.college = $('f-college').value.trim();
+  D.gradyr  = $('f-gradyr').value.trim();
+  D.ug      = $('f-ug').value.trim();
+  D.certs   = $('f-certs').value.trim();
+  D.jobtitle= $('f-jobtitle').value.trim();
+  D.employer= $('f-employer').value.trim();
+  D.tenure  = $('f-tenure').value.trim();
+  D.fn      = $('f-fn').value.trim();
+  D.industry= $('f-industry').value.trim();
+  D.yoe     = $('f-yoe').value;
+  D.history_text       = $('f-history').value.trim();
+  D.history_transcript = transcripts['history'] || '';
+  D.urgency = $('f-urgency').value;
+  D.target_text        = $('f-target').value.trim();
+  D.target_transcript  = transcripts['target'] || '';
+  D.ctc     = $('f-ctc').value.trim();
+  D.ectc    = $('f-ectc').value.trim();
+  D.outcome_text       = $('f-outcome').value.trim();
+  D.outcome_transcript = transcripts['outcome'] || '';
+}
+
+function blobToBase64(blob) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result.split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(blob);
+  });
+}
+
+async function submitToGDrive() {
+  collect();
+  $('uploading').classList.add('on');
+  try {
+    const payload = { ...D, timestamp: new Date().toISOString() };
+    const audioKeys = ['history', 'target', 'outcome'];
+    for (const k of audioKeys) {
+      if (audioBlobs[k]) {
+        payload['audio_' + k] = await blobToBase64(audioBlobs[k]);
+        payload['audio_' + k + '_mime'] = audioBlobs[k].type;
+      }
+    }
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch (e) {
+    console.warn('Submission error:', e);
+  }
+  $('uploading').classList.remove('on');
+}
+
+function audioVal(key) {
+  if (audioBlobs[key]) return '<span class="abadge">&#9679; voice recorded</span>';
+  const t = transcripts[key] || D[key + '_text'] || '';
+  if (t) return t.length > 55 ? t.slice(0, 55) + '…' : t;
+  return '—';
+}
+
+function buildSummary() {
+  const fn = firstName();
+  $('done-title').textContent = 'You\'re in' + (fn ? ', ' + fn + '.' : '.');
+  const rows = [
+    ['Name', D.name], ['Email', D.email], ['City', D.city],
+    ['Role', D.jobtitle + (D.employer ? ' at ' + D.employer : '')],
+    ['Experience', D.yoe], ['Situation', D.situation ? D.situation.replace(/-/g,' ') : ''],
+    ['Urgency', D.urgency], ['CTC', D.ctc + (D.ectc ? ' → ' + D.ectc : '')],
+    ['Career story', audioVal('history')],
+    ['Target direction', audioVal('target')],
+    ['Good outcome', audioVal('outcome')],
+  ];
+  $('sum-rows').innerHTML = rows.filter(r => r[1]).map(r =>
+    `<div class="sum-row"><span class="sum-l">${r[0]}</span><span class="sum-v">${r[1]}</span></div>`
+  ).join('');
+}
+
+$('btn-next').addEventListener('click', async () => {
+  collect();
+  if (!validate(cur)) {
+    const btn = $('btn-next'), orig = btn.textContent;
+    btn.textContent = 'Please complete required fields';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 2000);
+    return;
+  }
+  if (cur === TOTAL_STEPS) {
+    await submitToGDrive();
+    buildSummary();
+    cur = TOTAL_STEPS + 1;
+    show(TOTAL_STEPS + 1);
+    return;
+  }
+  cur++;
+  show(cur);
+});
+
+$('btn-back').addEventListener('click', () => { if (cur > 0) { cur--; show(cur); } });
+
+/* ── Audio engine ── */
+const MAX_SECS = { history: 180, target: 120, outcome: 120 };
+
+function setupAudio(key) {
+  const mic   = $('mic-' + key);
+  const pb    = $('pb-' + key);
+  const audEl = $('aud-' + key);
+  const rerec = $('rerec-' + key);
+  const wf    = $('wf-' + key);
+  const tmr   = $('tmr-' + key);
+  const tmrmax= $('tmrmax-' + key);
+  const lbl   = $('miclbl-' + key);
+  const az    = $('az-' + key);
+  const tl    = $('tl-' + key);
+  const tf    = $('tf-' + key);
+  const txArea= $('tx-' + key);
+  if (!mic) return;
+
+  let recording = false, chunks = [], recInterval = null, secs = 0, recognition = null, activeMR = null;
+
+  tl.addEventListener('click', () => {
+    tf.classList.add('on');
+    tl.style.display = 'none';
+    const d = tl.previousElementSibling;
+    if (d && d.classList.contains('or-div')) d.style.display = 'none';
+  });
+
+  rerec.addEventListener('click', () => {
+    pb.classList.remove('on');
+    az.classList.remove('done');
+    mic.classList.remove('rec');
+    wf.classList.remove('on');
+    tmr.classList.remove('on');
+    tmrmax.classList.remove('on');
+    tmr.textContent = '0:00';
+    lbl.textContent = 'Tap to speak';
+    lbl.classList.remove('rec', 'done');
+    audioBlobs[key] = null;
+    transcripts[key] = '';
+    txArea.innerHTML = '';
+    chunks = []; secs = 0; activeMR = null;
+  });
+
+  mic.addEventListener('click', async () => {
+    if (!recording) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        chunks = []; secs = 0;
+        const mime = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/ogg';
+        const mr = new MediaRecorder(stream, { mimeType: mime });
+        activeMR = mr;
+        mr.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+        mr.onstop = () => {
+          const blob = new Blob(chunks, { type: mime });
+          audioBlobs[key] = blob;
+          audEl.src = URL.createObjectURL(blob);
+          pb.classList.add('on');
+          az.classList.add('done');
+          lbl.textContent = 'Recording saved ✓';
+          lbl.classList.remove('rec'); lbl.classList.add('done');
+          wf.classList.remove('on');
+          tmr.classList.remove('on'); tmrmax.classList.remove('on');
+          mic.classList.remove('rec');
+          stream.getTracks().forEach(t => t.stop());
+          clearInterval(recInterval);
+          recording = false; activeMR = null;
+        };
+        mr.start(250);
+        recording = true;
+        mic.classList.add('rec');
+        wf.classList.add('on');
+        tmr.classList.add('on'); tmrmax.classList.add('on');
+        lbl.textContent = 'Tap to stop';
+        lbl.classList.add('rec');
+        recInterval = setInterval(() => {
+          secs++;
+          const m = Math.floor(secs / 60), s = secs % 60;
+          tmr.textContent = m + ':' + String(s).padStart(2,'0');
+          if (secs >= MAX_SECS[key]) mic.click();
+        }, 1000);
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SR) {
+          recognition = new SR();
+          recognition.continuous = true;
+          recognition.interimResults = true;
+          recognition.lang = 'en-IN';
+          let finalTx = '';
+          recognition.onresult = e => {
+            for (let i = e.resultIndex; i < e.results.length; i++) {
+              if (e.results[i].isFinal) finalTx += e.results[i][0].transcript + ' ';
+            }
+            transcripts[key] = finalTx.trim();
+            if (finalTx.trim()) {
+              txArea.innerHTML = '<div class="tx-tag">Live transcript</div><p class="tx-text">' + transcripts[key] + '</p>';
+            }
+          };
+          recognition.onerror = () => {};
+          recognition.start();
+        }
+      } catch (err) {
+        az.querySelector('.az-guide').innerHTML = '<span style="color:#E24B4A">Microphone access was denied. Please type your answer below.</span>';
+        tf.classList.add('on');
+        mic.style.display = 'none'; lbl.style.display = 'none';
+        tl.style.display = 'none';
+        const d = tl.previousElementSibling;
+        if (d) d.style.display = 'none';
+      }
+    } else {
+      clearInterval(recInterval);
+      if (recognition) { try { recognition.stop(); } catch(e){} }
+      if (activeMR && activeMR.state !== 'inactive') activeMR.stop();
+    }
+  });
+}
+
+['history','target','outcome'].forEach(setupAudio);
+</script>
+</body>
+</html>
